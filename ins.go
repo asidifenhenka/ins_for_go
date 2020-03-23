@@ -142,6 +142,10 @@ func getCount(urls  string, id string ,fileNameImg string, fileNameVideo string)
 		//io.Copy(f, bytes.NewReader(r.Body))
 		io.Copy(f, bytes.NewReader(r.Body))  //下载
 	})
+	c.Limit(&colly.LimitRule{
+		Parallelism: 2,
+		//Delay:      5 * time.Second,
+	})
 
 	c.Visit(urls)
 	c.Wait()
